@@ -1,0 +1,81 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Mariam Test Coin ICO">
+
+        <title>Mariam Test Coin ICO</title>
+        <link rel="icon" href="assets/image/favicon.png" type="image/png"> 
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/style.css">
+    <link id="avast_os_ext_custom_font" href="chrome-extension://eofcbnmajmjmplflapaojjnihcjkigck/common/ui/fonts/fonts.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div class="container">
+        
+        <div class="jumbotron">
+            <h1 class="display-5">Mariam Test Coin</h1>
+            <p class="lead"><strong id="contractAddress"></strong></p>
+            <h1 class="display-5">Total Raised</h1>
+            <p class="lead"><strong id="amountRaised"></strong></p>
+        </div>
+
+        <div class="row marketing">
+            <div class="col-lg-6">
+            <h4>Price</h4>
+            <p>1 ETH = 10 <span id="tokenSymbol"></span></p>
+
+            <h4>Total Supply</h4>
+            <p>1000</p>
+
+            <h4>First week bonus</h4>
+            <p>25%</p>
+            </div>
+
+            <div class="col-lg-6">
+            <h4>Start Date</h4>
+            <p>28th Dec 2018, 6:00 pm</p>
+
+            <h4>End Date</h4>
+            <p>28th Jan 2019, 7:20 pm</p>
+
+            <h4>Max Cap</h4>
+            <p>5 ETH</p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p class="text-center">© Mariam Rashid (B14158031) - 2018</p>
+        </footer>
+
+        </div> <!-- /container -->
+
+        <script src="assets/js/web3.min.js"></script>
+        <script>
+            if (typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+        } else {
+        // Set the provider you want from Web3.providers
+        web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        }
+        
+            var abi = 
+            [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"fundsWallet","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"version","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"unitsOneEthCanBuy","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalEthInWei","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"},{"name":"_extraData","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"}]
+
+    
+            // creation of contract object
+            var CoinContract = web3.eth.contract(abi);
+
+            // initiate contract for its contract address
+            var MyCoin = CoinContract.at('0x562a705842e5d0c7a4529b9b5b2e0424D0fd1271');
+            
+            MyCoin.totalEthInWei(function(err,data){
+                document.getElementById('amountRaised').innerHTML = (data.toString(10)/1000000000000000000) + ' ETH';
+            });
+            document.getElementById('contractAddress').innerHTML = MyCoin.address;
+            document.getElementById('tokenSymbol').innerHTML = "UBIT2018031";
+            
+        </script> 
+    </body>
+</html>
